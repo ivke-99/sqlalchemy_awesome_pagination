@@ -39,7 +39,7 @@ setup(
     author_email="ivandjuraki@protonmail.com",
     license="Apache 2.0",
     install_requires=[
-        "sqlalchemy>=1.3",
+        "sqlalchemy>=1.1",
     ],
     dependency_links=[
     ],
