@@ -16,9 +16,7 @@ The project requires sqlalchemy >= 1.1 installed.
 
 Install with pip
 
-```bash
-  pip install sqlalchemy_pagination
-```
+```pip install sqlalchemy_pagination```
     
 ## Features
 

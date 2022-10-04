@@ -31,7 +31,7 @@ setup(
     version=find_version("pagination", "module", "__init__.py"),
     description="Python package for implementing sqlalchemy pagination",
     long_description=long_description,
-    url="",
+    long_description_content_type="text/markdown",
     packages=find_packages(exclude=["doc"]),
     include_package_data=True,
     namespace_packages=["pagination"],
@@ -40,8 +40,6 @@ setup(
     license="Apache 2.0",
     install_requires=[
         "sqlalchemy>=1.1",
-    ],
-    dependency_links=[
     ],
     classifiers=[
         'Environment :: Web Environment',
