@@ -27,7 +27,7 @@ def find_version(*file_paths):
 
 
 setup(
-    name="SqlAlchemy Pagination",
+    name="SqlAlchemy Awesome Pagination",
     version=find_version("pagination", "module", "__init__.py"),
     description="Python package for implementing sqlalchemy pagination",
     long_description=long_description,

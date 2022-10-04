@@ -1,8 +1,8 @@
 
-# SQLAlchemy Pagination
+# SQLAlchemy Awesome Pagination
 
 
-SQLAlchemy Pagination is a small utility library that paginates an SQLAlchemy
+SQLAlchemy Awesome Pagination is a small utility library that paginates an SQLAlchemy
 object and returns the results ready for api serving.
 
 If you are creating a service/micro-service oriented architecture, and cannot use fastapi/flask or other frameworks built in paginations or libraries, this is for you.
