@@ -28,13 +28,13 @@ def find_version(*file_paths):
 
 setup(
     name="SqlAlchemy Pagination",
-    version=find_version("sqlalchemy_pagination", "pagination", "__init__.py"),
+    version=find_version("pagination", "module", "__init__.py"),
     description="Python package for implementing sqlalchemy pagination",
     long_description=long_description,
     url="",
     packages=find_packages(exclude=["doc"]),
     include_package_data=True,
-    namespace_packages=["sqlalchemy_pagination"],
+    namespace_packages=["pagination"],
     author="Ivan Djuraki",
     author_email="ivandjuraki@protonmail.com",
     license="Apache 2.0",
