@@ -3,7 +3,7 @@
 
 # SQLAlchemy Awesome Pagination
 
-###  [**Github**](https://github.com/ivke99/sqlalchemy_awesome_pagination)
+###  [**Github**](https://github.com/ivke-99/sqlalchemy_awesome_pagination)
 
 SQLAlchemy Awesome Pagination is a small utility library that paginates an SQLAlchemy
 
