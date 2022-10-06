@@ -27,14 +27,14 @@ def find_version(*file_paths):
 
 
 setup(
-    name="SqlAlchemy Awesome Pagination",
-    version=find_version("pagination", "module", "__init__.py"),
+    name="sqlalchemy_awesome_pagination",
+    version=find_version("sqlalchemy_awesome_pagination", "module", "__init__.py"),
     description="Python package for implementing sqlalchemy pagination",
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(exclude=["doc"]),
     include_package_data=True,
-    namespace_packages=["pagination"],
+    namespace_packages=["sqlalchemy_awesome_pagination"],
     author="Ivan Djuraki",
     author_email="ivandjuraki@protonmail.com",
     license="Apache 2.0",
