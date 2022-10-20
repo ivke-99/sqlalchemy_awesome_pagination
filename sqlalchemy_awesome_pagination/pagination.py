@@ -1,8 +1,8 @@
 def paginate(
-    query, 
-    page_number: int = None, 
-    page_size: int = None, 
-    direction: str = None, 
+    query,
+    page_number: int = None,
+    page_size: int = None,
+    direction: str = None,
     sort_by: str = None
 ):
     """Apply pagination to a SQLAlchemy query object.
@@ -73,6 +73,7 @@ def _offset(query, page_number, page_size):
         query = query.offset((page_number - 1) * page_size)
 
     return query
+
 
 def _sort_by(query, direction, sort_by):
     """
