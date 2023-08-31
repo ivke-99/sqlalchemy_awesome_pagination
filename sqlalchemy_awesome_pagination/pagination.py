@@ -1,10 +1,29 @@
-def paginate(
-    query,
-    page_number: int = None,
-    page_size: int = None,
-    direction: str = None,
-    sort_by: str = None
-):
+"""Slightly modified module, sqlalchemy_awesome_pagination from pypi.org
+https://pypi.org/project/sqlalchemy-awesome-pagination/
+License: Apache Software License (Apache 2.0)
+
+Author: Ivan Djuraki <ivandjuraki@protonmail.com>
+
+"""
+from dataclasses import dataclass
+
+
+@dataclass
+class PageResult:
+    results: list[object]
+    page: int
+    limit: int
+    total_results: int
+    next_page: int | None
+
+
+def paginate(query,
+             page_number: int = None,
+             page_size: int = None,
+             direction: str = None,
+             sort_by: str = None,
+             total_results: int = None
+             ):
     """Apply pagination to a SQLAlchemy query object.
     :param page_number:
         Page to be returned (starts and defaults to 1).
@@ -15,13 +34,16 @@ def paginate(
         Direction of ordering, asc or desc
     :param sort_by:
         Column for sorting
+    :param total_results:
+        To get from cache.
     :returns:
         A dict with items(sqlalchemy objects converted to dict),
         page number, desired page size, total number of results
     Basic usage::
         object = apply_pagination(query, 1, 10, "asc", "email")
     """
-    total_results = query.count()
+    if total_results is None:
+        total_results = query.count()
 
     query = _sort_by(query, direction, sort_by)
 
@@ -37,18 +59,19 @@ def paginate(
     if page_size is None or (page_size > total_results and total_results > 0):
         page_size = total_results
 
-    query = _offset(query, page_number, page_size)
-
     # Page number defaults to 1
     if page_number is None:
         page_number = 1
 
-    return {
-        "items": [k._asdict() for k in query.all()],
-        "page": page_number,
-        "size": page_size,
-        "total": total_results
-    }
+    query, offset_value = _offset(query, page_number, page_size)
+
+    results = list(query.all())
+    next_page = None if offset_value + page_size >= total_results else page_number + 1
+    return PageResult(results=results,
+                      page=page_number,
+                      limit=page_size,
+                      total_results=total_results, next_page=next_page
+                      )
 
 
 def _limit(query, page_size):
@@ -64,15 +87,14 @@ def _limit(query, page_size):
 
 
 def _offset(query, page_number, page_size):
-    if page_number is not None:
-        if page_number < 1:
-            raise Exception(
-                'Page number should be positive: {}'.format(page_number)
-            )
+    if page_number < 1:
+        raise Exception(
+            'Page number should be positive: {}'.format(page_number)
+        )
+    offset_value = (page_number - 1) * page_size
+    query = query.offset(offset_value)
 
-        query = query.offset((page_number - 1) * page_size)
-
-    return query
+    return query, offset_value
 
 
 def _sort_by(query, direction, sort_by):
